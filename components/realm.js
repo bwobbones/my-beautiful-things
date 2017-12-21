@@ -15,7 +15,9 @@ Thing.schema = {
   }
 }
 
-export default new Realm({
+const thingRealm = new Realm({
   schema: [Thing],
-  schemaVersion: 2
+  schemaVersion: 1
 });
+
+export default thingRealm;

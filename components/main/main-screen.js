@@ -30,7 +30,7 @@ export default class MainScreen extends React.Component {
   render() {
       const { navigate } = this.props.navigation;
       return (
-        <View>
+        <View style={{flex: 1, flexDirection: 'column'}}>
           <Card>
             <List>
               {
@@ -46,13 +46,15 @@ export default class MainScreen extends React.Component {
               }
             </List>
           </Card>
-          <Button
-            raised
-            icon={{name: 'playlist-add'}}
-            title='Add More Beautiful'
-            onPress={() => { 
-              this.addThing();
-            }} />
+          <Card>
+            <Button
+              raised
+              icon={{name: 'playlist-add'}}
+              title='Add More Beautiful'
+              onPress={() => { 
+                this.addThing();
+              }} />
+          </Card>
         </View>
     );
   }

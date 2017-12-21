@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Button, Card, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { Button, Card, Divider, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
 import * as ImagePicker from 'react-native-image-picker';
 
 import realm from '../realm';
+import renderIf from '../utils/renderIf';
 
 let options = {
   title: 'Take/Select a Photo',
-  customButtons: [
-    {name: 'fb', title: 'Choose Photo from Facebook'},
-  ],
   storageOptions: {
     skipBackup: true,
     path: 'beautiful',
@@ -29,10 +27,23 @@ export default class ThingsScreen extends React.Component {
   constructor(props) {
     super(props);
 
+    // This will eventually be used as a gallery, so its a list that we only use the first element
+    // of for now
+    let photoUri = undefined;
+    if (this.props.navigation.state.params.thing && this.props.navigation.state.params.thing.photos) {
+      photoUri = this.props.navigation.state.params.thing.photos[0];
+    }
+
     this.state = {
-      thing: this.props.navigation.state.params.thing
+      thing: this.props.navigation.state.params.thing,
+      photoSource: {
+        uri: photoUri
+      }
     };
 
+  }
+
+  selectImage(thing) {
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
     
@@ -46,14 +57,13 @@ export default class ThingsScreen extends React.Component {
         console.log('User tapped custom button: ', response.customButton);
       }
       else {
-        let source = { uri: response.uri };
-    
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        let source = { uri: response.uri }
     
         this.setState({
           photoSource: source
         });
+
+        this.updateText(thing, 'photos', [source.uri]);
       }
     });
   }
@@ -74,8 +84,15 @@ export default class ThingsScreen extends React.Component {
   render() {
     let tmpThing = this.state.thing;
     return (
-      <View>
-        <Card image={this.state.photoSource}/>
+      <View style={{flex: 1, flexDirection: 'column'}}>
+        {renderIf(this.state.photoSource.uri, 
+          <Card 
+            image={{uri: this.state.photoSource.uri}}
+            imageProps={{resizeMode: 'stretch'}}
+            style={styles.canvas}
+          /> 
+        )}
+       
         <Card>
           <FormLabel>What is it?</FormLabel>
           <FormInput
@@ -105,24 +122,51 @@ export default class ThingsScreen extends React.Component {
               this.updateText(tmpThing, 'itsStory', text);
             }}/>
         </Card>
+        <Card>
 
-        <Button
-          raised
-          icon={{name: 'save'}}
-          title='Save'
-          onPress={() => { 
-            this.saveThing();
-        }} />
+          <Button
+              raised
+              icon={{name: 'playlist-add'}}
+              title='Add a Photo'
+              onPress={() => { 
+                this.selectImage(tmpThing);
+              }} />
+
+          <Button
+            raised
+            icon={{name: 'save'}}
+            title='Save'
+            onPress={() => { 
+              this.saveThing();
+          }} />
+        </Card>
       </View>
     );
   }
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    marginBottom: 30,
+    width: 260,
+    alignItems: 'center',
+    backgroundColor: '#2196F3'
+  },
+  buttonText: {
+    padding: 20,
+    color: 'white'
+  },
+  canvas: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+});
