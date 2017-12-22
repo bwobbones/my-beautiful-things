@@ -40,18 +40,13 @@ export default class MainScreen extends React.Component {
   addThing() {
     let newThing = {
       uuid: uuid.v4(),
-      whatIsIt: 'quilt',
-      whenIFinishedIt: '23/12/2017',
-      whoIMadeItFor: 'Jack',
-      itsStory: 'I made it because I love him'
+      whatIsIt: '',
+      whenIFinishedIt: '',
+      whoIMadeItFor: ''
     };
 
-    realm.write(() => {
-      realm.create('Thing', newThing);
-    });
-
-    const things = realm.objects('Thing');
-    this.setState({ list: things });
+    const { navigate } = this.props.navigation;
+    navigate('things', { thing: newThing });
   }
 
   render() {

@@ -10,14 +10,14 @@ Thing.schema = {
     whatIsIt: 'string',
     whenIFinishedIt: 'string',
     whoIMadeItFor: 'string',
-    itsStory: 'string',
+    itsStory: 'string?',
     photos: 'string?[]'
   }
 }
 
 const thingRealm = new Realm({
   schema: [Thing],
-  schemaVersion: 1
+  schemaVersion: 2
 });
 
 export default thingRealm;
