@@ -11,7 +11,8 @@ export default class MainScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'My Beautiful Things'
+      title: 'My Beautiful Things',
+      headerStyle: styles.header
     };
   };
 
@@ -36,38 +37,6 @@ export default class MainScreen extends React.Component {
     })
   }
 
-  render() {
-      const { navigate } = this.props.navigation;
-      return (
-        <View style={{flex: 1, flexDirection: 'column'}}>
-          <Card>
-            <List>
-              {
-                this.state.list.map((listItem, i) => (
-                  <ListItem
-                    roundAvatar
-                    // avatar={{uri:listItem.avatar_url}}
-                    key={i}
-                    title={listItem.whatIsIt}
-                    onPress={() => { navigate('things', { thing: listItem }); }}
-                  />
-                ))
-              }
-            </List>
-          </Card>
-          <Card>
-            <Button
-              raised
-              icon={{name: 'playlist-add'}}
-              title='Add More Beautiful'
-              onPress={() => { 
-                this.addThing();
-              }} />
-          </Card>
-        </View>
-    );
-  }
-
   addThing() {
     let newThing = {
       uuid: uuid.v4(),
@@ -85,13 +54,60 @@ export default class MainScreen extends React.Component {
     this.setState({ list: things });
   }
 
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+      <View style={styles.container}>
+        <Card>
+          <List containerStyle={styles.thingList}>
+            {
+              this.state.list.map((listItem, i) => (
+                <ListItem
+                  roundAvatar
+                  // avatar={{uri:listItem.avatar_url}}
+                  key={i}
+                  title={listItem.whatIsIt}
+                  onPress={() => { navigate('things', { thing: listItem }); }}
+                />
+              ))
+            }
+          </List>
+        </Card>
+        <Card containerStyle={styles.buttonCard}>
+          <Button
+            buttonStyle={styles.button}
+            icon={{name: 'playlist-add'}}
+            title='Add More Beautiful'
+            onPress={() => { 
+              this.addThing();
+            }} />
+          </Card>
+      </View>
+    );
+  }
+
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  header: {
+    backgroundColor: '#737eb6'
+  },
+  button: {
+    backgroundColor: '#b2243c'
+  },
+  buttonCard: {
+    padding: 0,
+    backgroundColor: '#b2243c'
+  },
+  thingList: {
+    marginTop: 0, 
+    marginBottom: 0, 
+    borderTopWidth: 1, 
+    borderBottomWidth: 0, 
+    borderBottomColor:'#cbd2d9'
+  }
+});

@@ -20,7 +20,8 @@ export default class ThingsScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'This Beautiful Thing'
+      title: 'This Beautiful Thing',
+      headerStyle: styles.header
     };
   };
 
@@ -84,11 +85,13 @@ export default class ThingsScreen extends React.Component {
   render() {
     let tmpThing = this.state.thing;
     return (
-      <View style={{flex: 1, flexDirection: 'column'}}>
+      <View style={styles.container}>
+
         {renderIf(this.state.photoSource.uri, 
           <Card 
+            containerStyle={styles.imageCard}
             image={{uri: this.state.photoSource.uri}}
-            imageProps={{resizeMode: 'stretch'}}
+            imageProps={{resizeMode: 'cover'}}
             style={styles.canvas}
           /> 
         )}
@@ -122,18 +125,20 @@ export default class ThingsScreen extends React.Component {
               this.updateText(tmpThing, 'itsStory', text);
             }}/>
         </Card>
-        <Card>
 
+        <Card containerStyle={styles.buttonCard}>
           <Button
-              raised
+              buttonStyle={styles.button}
               icon={{name: 'playlist-add'}}
               title='Add a Photo'
               onPress={() => { 
                 this.selectImage(tmpThing);
               }} />
 
+          <Divider style={{ height: 10 }} />
+
           <Button
-            raised
+            buttonStyle={styles.button}
             icon={{name: 'save'}}
             title='Save'
             onPress={() => { 
@@ -148,25 +153,29 @@ export default class ThingsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column'
+  },
+  header: {
+    backgroundColor: '#737eb6'
   },
   button: {
-    marginBottom: 30,
-    width: 260,
-    alignItems: 'center',
-    backgroundColor: '#2196F3'
+    backgroundColor: '#b2243c'
   },
-  buttonText: {
-    padding: 20,
-    color: 'white'
+  imageCard: {
+    padding: 0,
+    height: '25%',
+    backgroundColor: 'rgba(52, 52, 52, 0.0)'
+  },
+  buttonCard: {
+    padding: 0,
+    marginBottom: 10,
+    backgroundColor: '#b2243c'
   },
   canvas: {
     position: 'absolute',
     top: 0,
     left: 0,
     bottom: 0,
-    right: 0,
+    right: 0
   },
 });
