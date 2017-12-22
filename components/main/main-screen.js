@@ -3,6 +3,7 @@ import { Alert, AsyncStorage, Image, Picker, ScrollView, StatusBar, StyleSheet, 
 import { Button, Card, Divider, List, ListItem } from 'react-native-elements';
 
 import * as uuid from 'react-native-uuid';
+import SplashScreen from 'react-native-smart-splash-screen'
 
 import realm from '../realm';
 
@@ -25,6 +26,14 @@ export default class MainScreen extends React.Component {
   componentWillMount() {
     const things = realm.objects('Thing');
     this.setState({ list: things });
+  }
+
+  componentDidMount () {
+    SplashScreen.close({
+       animationType: SplashScreen.animationType.scale,
+       duration: 850,
+       delay: 500,
+    })
   }
 
   render() {
