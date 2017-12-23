@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import { Alert, AsyncStorage, Image, Picker, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Alert, AsyncStorage, Image, Picker, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Button, Card, Divider, List, ListItem } from 'react-native-elements';
 
-// not sure why i need to require this or why it works
+// not sure why i need to 'require' this or why it works
 var moment = require('moment');
 import * as uuid from 'uuid-js';
 import SplashScreen from 'react-native-smart-splash-screen'
+import NavigationBar from 'react-native-navbar';
 
 import realm from '../realm';
+
+const titleConfig = {
+  title: 'My Beautiful Things',
+};
 
 export default class MainScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'My Beautiful Things',
-      headerStyle: styles.header
+      header: null,
     };
   };
 
@@ -55,6 +59,16 @@ export default class MainScreen extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <ScrollView style={styles.container}>
+        <NavigationBar 
+          style={{ margin:10 }}
+          tintColor='#737eb6'
+          title={titleConfig}
+          rightButton={{
+            title: 'About',
+            handler: () => alert('hello!'),
+            tintColor: 'white'
+          }}
+        />
         <Card>
           <List containerStyle={styles.thingList}>
             {
@@ -89,9 +103,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column'
-  },
-  header: {
-    backgroundColor: '#737eb6'
   },
   button: {
     backgroundColor: '#b2243c'

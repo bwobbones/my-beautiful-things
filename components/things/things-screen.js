@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Button, Card, Divider, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
-import * as ImagePicker from 'react-native-image-picker';
 var moment = require('moment');
+import * as ImagePicker from 'react-native-image-picker';
+import NavigationBar from 'react-native-navbar';
 
 import realm from '../realm';
 import renderIf from '../utils/renderIf';
@@ -17,12 +18,15 @@ let options = {
   }
 }
 
+const titleConfig = {
+  title: 'This Beautiful Things',
+};
+
 export default class ThingsScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'This Beautiful Thing',
-      headerStyle: styles.header
+      header: null,
     };
   };
 
@@ -103,6 +107,22 @@ export default class ThingsScreen extends React.Component {
     let tmpThing = this.state.thing;
     return (
       <ScrollView style={styles.container}>
+
+        <NavigationBar 
+          style={{ margin:10 }}
+          tintColor='#737eb6'
+          title={titleConfig}
+          leftButton={{
+            title: 'Save',
+            handler: () => this.saveThing(),
+            tintColor: 'white'
+          }}
+          rightButton={{
+            title: 'About',
+            handler: () => alert('hello!'),
+            tintColor: 'white'
+          }}
+        />
 
         {renderIf(this.state.photoSource.uri, 
           <Card 
