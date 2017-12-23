@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Card, Divider, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
 import * as ImagePicker from 'react-native-image-picker';
@@ -74,6 +74,13 @@ export default class ThingsScreen extends React.Component {
     if (this.thingIsValid()) {
       this.props.navigation.navigate('main');
     }
+  }
+
+  deleteThing() {
+    realm.write(() => {
+      realm.delete(this.state.thing);
+      this.props.navigation.navigate('main');
+    });
   }
 
   thingIsValid() {
@@ -157,6 +164,24 @@ export default class ThingsScreen extends React.Component {
               title='Add a Photo'
               onPress={() => { 
                 this.selectImage(tmpThing);
+              }} />
+
+          <Divider style={{ height: 10 }} />
+
+          <Button
+              buttonStyle={styles.button}
+              icon={{name: 'delete'}}
+              title='Delete'
+              onPress={() => { 
+                Alert.alert(
+                  'You sure you want to delete?',
+                  'Your beautiful thing will be gone forever',
+                  [
+                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: () => this.deleteThing()},
+                  ],
+                  { cancelable: true }
+                )
               }} />
 
           <Divider style={{ height: 10 }} />
