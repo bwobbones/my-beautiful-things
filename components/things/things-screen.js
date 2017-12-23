@@ -71,7 +71,16 @@ export default class ThingsScreen extends React.Component {
 
   // this now needs to be attached to the back button
   saveThing() {
-    this.props.navigation.navigate('main');
+    if (this.thingIsValid()) {
+      this.props.navigation.navigate('main');
+    }
+  }
+
+  thingIsValid() {
+    let tmpThing = this.state.thing;
+    return tmpThing.whatIsIt !== '' &&
+      tmpThing.whenIFinishedIt !== '' &&
+      tmpThing.whoIMadeItFor !== '';
   }
 
   updateText(thing, field, value) {
@@ -103,6 +112,11 @@ export default class ThingsScreen extends React.Component {
             onChangeText={(text) => {
               this.updateText(tmpThing, 'whatIsIt', text);
             }}/>
+          {renderIf(tmpThing.whatIsIt === '', 
+            <FormValidationMessage>
+              {'This field is required'}
+            </FormValidationMessage>
+          )}
 
           <FormLabel>When I finished it</FormLabel>
           <FormInput 
@@ -110,6 +124,11 @@ export default class ThingsScreen extends React.Component {
             onChangeText={(text) => {
               this.updateText(tmpThing, 'whenIFinishedIt', text);
             }}/>
+          {renderIf(tmpThing.whenIFinishedIt === '', 
+            <FormValidationMessage>
+              {'This field is required'}
+            </FormValidationMessage>
+          )}
 
           <FormLabel>Who I made it for</FormLabel>
           <FormInput 
@@ -117,6 +136,11 @@ export default class ThingsScreen extends React.Component {
             onChangeText={(text) => {
               this.updateText(tmpThing, 'whoIMadeItFor', text);
             }}/>
+          {renderIf(tmpThing.whoIMadeItFor === '', 
+            <FormValidationMessage>
+              {'This field is required'}
+            </FormValidationMessage>
+          )}
 
           <FormLabel>Its story</FormLabel>
           <FormInput 
