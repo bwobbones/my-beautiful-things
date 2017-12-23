@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, AsyncStorage, Image, Picker, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, AsyncStorage, Image, Picker, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Button, Card, Divider, List, ListItem } from 'react-native-elements';
 
 import * as uuid from 'uuid-js';
@@ -52,7 +52,7 @@ export default class MainScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Card>
           <List containerStyle={styles.thingList}>
             {
@@ -77,7 +77,7 @@ export default class MainScreen extends React.Component {
               this.addThing();
             }} />
           </Card>
-      </View>
+      </ScrollView>
     );
   }
 

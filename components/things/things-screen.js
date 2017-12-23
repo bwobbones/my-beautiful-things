@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Button, Card, Divider, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
 import * as ImagePicker from 'react-native-image-picker';
@@ -101,7 +101,7 @@ export default class ThingsScreen extends React.Component {
   render() {
     let tmpThing = this.state.thing;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
 
         {renderIf(this.state.photoSource.uri, 
           <Card 
@@ -194,7 +194,7 @@ export default class ThingsScreen extends React.Component {
               this.saveThing();
           }} />
         </Card>
-      </View>
+      </ScrollView>
     );
   }
 }
