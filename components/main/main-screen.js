@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Alert, AsyncStorage, Image, Picker, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Button, Card, Divider, List, ListItem } from 'react-native-elements';
 
-import * as uuid from 'react-native-uuid';
+import * as uuid from 'uuid-js';
 import SplashScreen from 'react-native-smart-splash-screen'
 
 import realm from '../realm';
@@ -39,7 +39,7 @@ export default class MainScreen extends React.Component {
 
   addThing() {
     let newThing = {
-      uuid: uuid.v4(),
+      uuid: uuid.create(4).toString(),
       whatIsIt: '',
       whenIFinishedIt: '',
       whoIMadeItFor: ''
