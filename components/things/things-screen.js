@@ -3,6 +3,7 @@ import { Alert, Image, StyleSheet, Text, TouchableOpacity, ScrollView } from 're
 import { Button, Card, Divider, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
 import * as ImagePicker from 'react-native-image-picker';
+var moment = require('moment');
 
 import realm from '../realm';
 import renderIf from '../utils/renderIf';
@@ -86,7 +87,7 @@ export default class ThingsScreen extends React.Component {
   thingIsValid() {
     let tmpThing = this.state.thing;
     return tmpThing.whatIsIt !== '' &&
-      tmpThing.whenIFinishedIt !== '' &&
+      (tmpThing.whenIFinishedIt !== '' || moment(tmpThing.whenIFinishedIt, 'DD/MM/YYYY', true).isValid())
       tmpThing.whoIMadeItFor !== '';
   }
 
@@ -131,9 +132,9 @@ export default class ThingsScreen extends React.Component {
             onChangeText={(text) => {
               this.updateText(tmpThing, 'whenIFinishedIt', text);
             }}/>
-          {renderIf(tmpThing.whenIFinishedIt === '', 
+          {renderIf((tmpThing.whenIFinishedIt === '' || !moment(tmpThing.whenIFinishedIt, 'DD/MM/YYYY', true).isValid()), 
             <FormValidationMessage>
-              {'This field is required'}
+              {'Date needs to be in the format dd/mm/yyyy'}
             </FormValidationMessage>
           )}
 

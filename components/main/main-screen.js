@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Alert, AsyncStorage, Image, Picker, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Button, Card, Divider, List, ListItem } from 'react-native-elements';
 
+// not sure why i need to require this or why it works
+var moment = require('moment');
 import * as uuid from 'uuid-js';
 import SplashScreen from 'react-native-smart-splash-screen'
 
@@ -41,7 +43,7 @@ export default class MainScreen extends React.Component {
     let newThing = {
       uuid: uuid.create(4).toString(),
       whatIsIt: '',
-      whenIFinishedIt: '',
+      whenIFinishedIt:moment().format('DD/MM/YYYY'),
       whoIMadeItFor: ''
     };
 
