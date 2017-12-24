@@ -125,12 +125,11 @@ export default class ThingsScreen extends React.Component {
         />
 
         {renderIf(this.state.photoSource.uri, 
-          <Card 
-            containerStyle={styles.imageCard}
-            image={{uri: this.state.photoSource.uri}}
+          <Image
+            style={{width: '100%', height: 200}}
             imageProps={{resizeMode: 'cover'}}
-            style={styles.canvas}
-          /> 
+            source={{uri: this.state.photoSource.uri}}
+          />
         )}
        
         <Card>
@@ -229,27 +228,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
-  header: {
-    backgroundColor: '#737eb6'
-  },
   button: {
     backgroundColor: '#b2243c'
-  },
-  imageCard: {
-    padding: 0,
-    height: '25%',
-    backgroundColor: 'rgba(52, 52, 52, 0.0)'
   },
   buttonCard: {
     padding: 0,
     marginBottom: 10,
     backgroundColor: '#b2243c'
-  },
-  canvas: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0
-  },
+  }
 });
