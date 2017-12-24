@@ -136,6 +136,7 @@ export default class ThingsScreen extends React.Component {
         <Card>
           <FormLabel>What is it?</FormLabel>
           <FormInput
+            inputStyle={{width: '100%'}}
             value={tmpThing.whatIsIt} 
             onChangeText={(text) => {
               this.updateText(tmpThing, 'whatIsIt', text);
@@ -161,6 +162,7 @@ export default class ThingsScreen extends React.Component {
           <FormLabel>Who I made it for</FormLabel>
           <FormInput 
             value={tmpThing.whoIMadeItFor}
+            inputStyle={{width: '100%'}}
             onChangeText={(text) => {
               this.updateText(tmpThing, 'whoIMadeItFor', text);
             }}/>
@@ -172,6 +174,8 @@ export default class ThingsScreen extends React.Component {
 
           <FormLabel>Its story</FormLabel>
           <FormInput 
+            multiline
+            inputStyle={{width: '100%'}}
             value={tmpThing.itsStory}
             onChangeText={(text) => {
               this.updateText(tmpThing, 'itsStory', text);
