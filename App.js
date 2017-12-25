@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import MainScreen from './components/main/main-screen';
 import ThingsScreen from './components/things/things-screen';
 import AboutScreen from  './components/about/about-screen';
+import GalleryScreen from  './components/gallery/gallery-screen';
 
 const AppNavigator = StackNavigator(
 {
@@ -16,6 +17,9 @@ const AppNavigator = StackNavigator(
   },
   about: {
     screen: AboutScreen
+  },
+  gallery: {
+    screen: GalleryScreen
   }
 },{
 cardStyle: {

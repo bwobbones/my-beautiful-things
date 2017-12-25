@@ -122,11 +122,13 @@ export default class ThingsScreen extends React.Component {
         />
 
         {renderIf(this.state.photoSource.uri, 
-          <Image
-            style={{width: '100%', height: 200}}
-            imageProps={{resizeMode: 'cover'}}
-            source={{ uri: 'data:image/jpeg;base64,' + this.state.photoSource.uri }}
-          />
+          <TouchableOpacity onPress={() => { this.props.navigation.navigate('gallery', { thing: tmpThing }) }}>
+            <Image
+              style={{width: '100%', height: 200}}
+              imageProps={{resizeMode: 'cover'}}
+              source={{ uri: 'data:image/jpeg;base64,' + this.state.photoSource.uri }}
+            />
+          </TouchableOpacity>
         )}
        
         <Card>
