@@ -74,8 +74,7 @@ export default class MainScreen extends React.Component {
             {
               this.state.list.map((listItem, i) => (
                 <ListItem
-                  roundAvatar
-                  // avatar={{uri:listItem.avatar_url}}
+                  avatar={{ uri: 'data:image/jpeg;base64,' + listItem.photos[0]}}
                   key={i}
                   title={listItem.whatIsIt}
                   onPress={() => { navigate('things', { thing: listItem }); }}
