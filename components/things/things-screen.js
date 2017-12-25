@@ -63,13 +63,15 @@ export default class ThingsScreen extends React.Component {
         console.log('User tapped custom button: ', response.customButton);
       }
       else {
-        let source = { uri: response.uri }
+        let source = { uri: 'data:image/jpeg;base64,' + response.data }
     
         this.setState({
-          photoSource: source
+          photoSource: {
+            uri: response.data
+          }
         });
 
-        this.updateText(thing, 'photos', [source.uri]);
+        this.updateText(thing, 'photos', [response.data]);
       }
     });
   }
@@ -123,7 +125,7 @@ export default class ThingsScreen extends React.Component {
           <Image
             style={{width: '100%', height: 200}}
             imageProps={{resizeMode: 'cover'}}
-            source={{uri: this.state.photoSource.uri}}
+            source={{ uri: 'data:image/jpeg;base64,' + this.state.photoSource.uri }}
           />
         )}
        
