@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 
 import MainScreen from './components/main/main-screen';
 import ThingsScreen from './components/things/things-screen';
+import AboutScreen from  './components/about/about-screen';
 
 const AppNavigator = StackNavigator(
 {
@@ -12,6 +13,9 @@ const AppNavigator = StackNavigator(
   },
   things: {
     screen: ThingsScreen
+  },
+  about: {
+    screen: AboutScreen
   }
 },{
 cardStyle: {

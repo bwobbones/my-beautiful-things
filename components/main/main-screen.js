@@ -65,7 +65,7 @@ export default class MainScreen extends React.Component {
           title={titleConfig}
           rightButton={{
             title: 'About',
-            handler: () => alert('hello!'),
+            handler: () => { navigate('about') },
             tintColor: 'white'
           }}
         />

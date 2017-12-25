@@ -117,11 +117,6 @@ export default class ThingsScreen extends React.Component {
             handler: () => this.saveThing(),
             tintColor: 'white'
           }}
-          rightButton={{
-            title: 'About',
-            handler: () => alert('hello!'),
-            tintColor: 'white'
-          }}
         />
 
         {renderIf(this.state.photoSource.uri, 
