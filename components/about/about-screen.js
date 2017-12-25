@@ -50,8 +50,8 @@ export default class AboutScreen extends React.Component {
           </Text>
           <Divider style={styles.divider} />
           <Text>
-            Rather that show off her beautiful things on Facebook or Pinterest, Lexi holds her beautiful things near
-            to her heart and shares them only with whoever is lucky enough to receive them.  To share them with anyone
+            Rather that show off her beautiful things on Facebook or Pinterest, Lexi holds her them near
+            to her heart and shares them only with those lucky enough to receive them.  To share them with anyone
             else would in a small way de-value them and reduce their specialness.
           </Text>
           <Divider style={styles.divider} />
@@ -65,6 +65,11 @@ export default class AboutScreen extends React.Component {
           <Text>
             You can take a photo, write a story and most of all remember each of the wonderful things that you make without
             worrying about it getting to the internet, everything is stored on your phone just for you. 
+          </Text>
+          <Divider style={styles.divider} />
+          <Text>
+            This project is hosted at https://github.com/bwobbones/my-beautiful-things where you can raise issues, submit PRs.
+            Feel free to pass it on to a beautiful thing in your life.
           </Text>
         </Card>
       </ScrollView>
